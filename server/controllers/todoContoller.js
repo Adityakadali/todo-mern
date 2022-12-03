@@ -4,7 +4,8 @@ const { TodoModel } = require("../models/todoModel");
 // Fetches all Todos in DB
 const getTodos = async (req, res) => {
   try {
-    const todos = await TodoModel.find();
+    const { userid } = req.body;
+    const todos = await TodoModel.find({ userid });
     res.status(200).json(todos);
   } catch (error) {
     res.status(500).json({
@@ -18,21 +19,23 @@ const getTodos = async (req, res) => {
 // Adds todo Entry to DB
 const addTodo = async (req, res) => {
   try {
-    const { title, task } = req.body;
-    if (!title) {
-      return res.status(404).json({
-        staus: 404,
-        message: "Title cannot be empty",
+    const { userid, title, task } = req.body;
+    if (!(title || userid)) {
+      return res.status(400).json({
+        staus: 400,
+        message: "userid or title cannot be empty",
       });
     }
     try {
       const todo = new TodoModel({
+        userid: userid,
         title: title,
       });
 
-      if (task) {
-        await todo.tasks.push(task);
-      }
+      console.log(task);
+
+      if (task) JSON.parse(task).forEach((e) => todo.tasks.push(e));
+
       await todo.save();
       res.status(200).json(todo);
     } catch (error) {
