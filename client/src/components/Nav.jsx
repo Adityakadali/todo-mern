@@ -29,10 +29,13 @@ function Nav() {
   };
   return (
     <header>
-      <nav className="container mx-auto max-w-5xl">
+      <nav className="container mx-auto max-w-5xl py-2">
         <div className="navbar bg-base-100">
           <div className="flex-1">
-            <NavLink to="/" className="btn btn-ghost normal-case text-xl">
+            <NavLink
+              to="/"
+              className="normal-case text-2xl text-neutral-content"
+            >
               Task Master
             </NavLink>
           </div>
@@ -40,7 +43,7 @@ function Nav() {
             {user ? (
               <>
                 <div className="avatar placeholder">
-                  <div className="bg-primary text-neutral-content rounded-full w-11">
+                  <div className="bg-neutral-content text-neutral-content rounded-full w-10 ring ring-primary ring-offset-base-100 ring-offset-2">
                     <span className="text-md text-neutral font-bold">
                       {user.slice(0, 2).toUpperCase()}
                     </span>
