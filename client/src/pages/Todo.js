@@ -1,5 +1,5 @@
 import { Client, Account } from "appwrite";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../useStore";
 import config from "../config";
@@ -23,6 +23,7 @@ function Todo() {
         navigate("/login");
       }
     );
+    // eslint-disable-next-line
   }, []);
 
   return (

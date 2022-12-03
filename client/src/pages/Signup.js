@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Client, Account, ID } from "appwrite";
 import config from "../config";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../useStore";
 
 function Signup() {
+  const client = new Client();
+  const account = new Account(client);
+  client.setEndpoint(config.endpoint).setProject(config.projectID);
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const promise = account.get();
+    promise.then(
+      function (response) {
+        navigate("/todo");
+      },
+      function (error) {}
+    );
+    // eslint-disable-next-line
+  }, []);
 
   const Signup = (e) => {
     e.preventDefault();
@@ -20,8 +34,8 @@ function Signup() {
 
     const promise = account.create(ID.unique(), email, password, username);
     promise.then(
-      function (response) {
-        const login = account.createEmailSession(email, password);
+      async function (response) {
+        await account.createEmailSession(email, password);
         navigate("/todo");
       },
       function (error) {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Client, Account } from "appwrite";
 import config from "../config";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,17 @@ function Login() {
   const account = new Account(client);
 
   client.setEndpoint(config.endpoint).setProject(config.projectID);
+
+  useEffect(() => {
+    const promise = account.get();
+    promise.then(
+      function (response) {
+        navigate("/todo");
+      },
+      function (error) {}
+    );
+    // eslint-disable-next-line
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
