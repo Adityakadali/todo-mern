@@ -4,7 +4,8 @@ const { TodoModel } = require("../models/todoModel");
 // Fetches all Todos in DB
 const getTodos = async (req, res) => {
   try {
-    const { userid } = req.body;
+    const { userid } = req.params;
+    console.log(userid);
     const todos = await TodoModel.find({ userid });
     res.status(200).json(todos);
   } catch (error) {
@@ -31,8 +32,6 @@ const addTodo = async (req, res) => {
         userid: userid,
         title: title,
       });
-
-      console.log(task);
 
       if (task) JSON.parse(task).forEach((e) => todo.tasks.push(e));
 

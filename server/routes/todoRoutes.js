@@ -7,6 +7,8 @@ const {
   editTodo,
 } = require("../controllers/todoContoller");
 
-todo.route("/").get(getTodos).post(addTodo).delete(deleteTodo).put(editTodo);
+todo.get("/:userid", getTodos);
+
+todo.route("/").post(addTodo).delete(deleteTodo).put(editTodo);
 
 module.exports = { todo };
