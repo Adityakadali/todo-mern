@@ -6,12 +6,12 @@ import { useEffect } from "react";
 
 function Nav() {
   const navigate = useNavigate();
-  const setuser = useUserStore((state) => state.setuser);
+  const userstate = useUserStore((state) => state.setuser);
   const user = useUserStore((state) => state.username);
   const clearuser = useUserStore((state) => state.logout);
+
   const client = new Client();
   const account = new Account(client);
-
   client.setEndpoint(config.endpoint).setProject(config.projectID);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Nav() {
 
     promise.then(
       function (response) {
-        setuser(response.name, response.$id);
+        userstate(response.name, response.$id);
       },
       function (error) {
         console.log(error); // Failure
