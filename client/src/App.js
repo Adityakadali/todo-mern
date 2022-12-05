@@ -3,7 +3,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Todo from "./pages/Todo";
+import Mytodos from "./pages/Mytodos";
 function App() {
   return (
     <>
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route path="todo" element={<Todo />} />
+        <Route path="todos" element={<Mytodos />} />
       </Routes>
     </>
   );

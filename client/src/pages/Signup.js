@@ -17,7 +17,7 @@ function Signup() {
     const promise = account.get();
     promise.then(
       function (response) {
-        navigate("/todo");
+        navigate("/todos");
       },
       function (error) {}
     );
@@ -36,7 +36,7 @@ function Signup() {
     promise.then(
       async function (response) {
         await account.createEmailSession(email, password);
-        navigate("/todo");
+        navigate("/todos");
       },
       function (error) {
         console.log(error); // Failure

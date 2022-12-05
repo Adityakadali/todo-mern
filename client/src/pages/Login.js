@@ -17,7 +17,7 @@ function Login() {
     const promise = account.get();
     promise.then(
       function (response) {
-        navigate("/todo");
+        navigate("/todos");
       },
       function (error) {}
     );
@@ -29,7 +29,7 @@ function Login() {
     const promise = account.createEmailSession(email, password);
     promise.then(
       function (response) {
-        navigate("/todo");
+        navigate("/todos");
       },
       function (error) {
         console.log(error); // Failure
