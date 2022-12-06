@@ -11,10 +11,12 @@ const Todos = () => {
   const stateTodos = useUserStore((state) => state.todos);
   useEffect(() => {
     setTodos(stateTodos);
+    // eslint-disable-next-line
   }, [stateTodos]);
 
   useEffect(() => {
     if (id) fetchTodos();
+    // eslint-disable-next-line
   }, [id]);
   const fetchTodos = async () => {
     const { data } = await axios.get(`/todo/${id}`);
@@ -51,7 +53,7 @@ const Todos = () => {
                 <input
                   value={todoTitle}
                   onChange={(e) => setTodoTitle(e.target.value)}
-                  className="input input-bordered input-primary w-full col-span-4 text-neutral-content"
+                  className="input input-bordered w-full col-span-4 text-neutral-content"
                 />
               ) : (
                 <Link
