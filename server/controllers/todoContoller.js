@@ -5,7 +5,7 @@ const { TodoModel } = require("../models/todoModel");
 const getTodos = async (req, res) => {
   try {
     const { userid } = req.params;
-    const todos = await TodoModel.find({ userid });
+    const todos = await TodoModel.find({ userid }).sort("-updatedAt");
     res.status(200).json(todos);
   } catch (error) {
     res.status(500).json({
@@ -31,8 +31,7 @@ const addTodo = async (req, res) => {
         userid: userid,
         title: title,
       });
-
-      if (task) JSON.parse(task).forEach((e) => todo.tasks.push(e));
+      if (task) task.forEach((e) => todo.tasks.push(e));
 
       await todo.save();
       res.status(200).json(todo);
