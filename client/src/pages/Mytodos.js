@@ -1,9 +1,8 @@
 import { Client, Account } from "appwrite";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../useStore";
+import useUserStore from "../store/useStore";
 import config from "../config";
-import axios from "axios";
 import Search from "../components/Search";
 import Todos from "../components/Todos";
 
@@ -15,13 +14,6 @@ function Mytodos() {
   client.setEndpoint(config.endpoint).setProject(config.projectID);
 
   const user = useUserStore((state) => state.setuser);
-  const id = useUserStore((state) => state.userid);
-  const [todos, setTodos] = useState([]);
-
-  const fetchTodos = async () => {
-    const { data } = await axios.get(`/todo/${id}`);
-    setTodos(data);
-  };
 
   useEffect(() => {
     const promise = account.get();
@@ -37,16 +29,12 @@ function Mytodos() {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (id) fetchTodos();
-  }, [id]);
-
   return (
     <main>
       <section>
         <div className="container max-w-5xl mx-auto">
           <Search />
-          <Todos data={todos} />
+          <Todos />
         </div>
       </section>
     </main>

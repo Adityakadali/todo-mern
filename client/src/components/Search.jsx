@@ -1,7 +1,10 @@
+import AddTodo from "./AddTodo";
+
 const Search = () => {
   return (
-    <div className="flex justify-end">
-      <div className="form-control mt-4">
+    <div className="flex justify-between mt-4">
+      <AddTodo />
+      <div className="form-control">
         <div className="input-group">
           <input
             type="text"

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import useUserStore from "../useStore";
+import useUserStore from "../store/useStore";
 import { Client, Account } from "appwrite";
 import config from "../config";
 import { useEffect } from "react";
