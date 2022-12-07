@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import useUserStore from "../store/useStore";
 import { useEffect } from "react";
+import Title from "./TodoTitle";
 
 const Todos = () => {
   const [todos, setTodos] = useState("");
@@ -56,12 +56,7 @@ const Todos = () => {
                   className="input input-bordered w-full col-span-4 text-neutral-content"
                 />
               ) : (
-                <Link
-                  to={e._id}
-                  className="col-span-4 text-neutral-content text-lg"
-                >
-                  {e.title}
-                </Link>
+                <Title data={e} />
               )}
               {editindex === i ? (
                 <button
