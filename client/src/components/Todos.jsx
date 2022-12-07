@@ -39,7 +39,6 @@ const Todos = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log(id);
     await axios.delete("/todo", { data: { id: id } });
     fetchTodos();
   };

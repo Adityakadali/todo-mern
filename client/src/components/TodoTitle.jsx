@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 
 const Title = ({ data }) => {
+  const [tododata, setTodoData] = useState(data);
   const [editindex, setEditindex] = useState("");
   const [task, setTask] = useState("");
 
@@ -10,15 +12,20 @@ const Title = ({ data }) => {
     setTask(task);
   };
 
+  useEffect(() => {
+    setTodoData(data);
+  }, [data]);
+
   const handleSave = () => {};
 
   const handleDelete = async (taskindex) => {
-    await axios.delete("/task", {
+    const response = await axios.delete("/task", {
       data: {
         id: data._id,
         key: taskindex,
       },
     });
+    setTodoData(response.data);
   };
 
   const close = () => {
@@ -33,17 +40,17 @@ const Title = ({ data }) => {
         htmlFor="my-modal-2"
         className="col-span-4 text-lg text-neutral-content cursor-pointer"
       >
-        {data.title}
+        {tododata.title}
       </label>
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box max-w-sm">
           <h3 className="font-bold text-2xl text-center text-neutral-content">
-            {data.title}
+            {tododata.title}
           </h3>
           <ul>
-            {data.tasks.map((e, i) => (
+            {tododata.tasks.map((e, i) => (
               <li
                 className="flex gap-4 items-center justify-between mt-4"
                 key={i}
