@@ -30,8 +30,8 @@ const AddTodo = () => {
   return (
     <>
       {/* The button to open modal */}
-      <label htmlFor="my-modal-1" className="btn btn-secondary">
-        <span className="normal-case tracking-wider">Add Todo</span>
+      <label htmlFor="my-modal-1" className="btn btn-secondary btn-wide">
+        <span className="normal-case tracking-wider">Add New Todo</span>
       </label>
       {/* Modal part */}
       <input type="checkbox" id="my-modal-1" className="modal-toggle" />
@@ -99,7 +99,7 @@ const AddTodo = () => {
               <></>
             )}
             <button
-              className="btn btn-secondary btn-block max-w-sm mt-4 mx-auto"
+              className="btn btn-secondary btn-block max-w-sm mt-4 mx-auto normal-case"
               onClick={handleTodo}
             >
               Add todo
