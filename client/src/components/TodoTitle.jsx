@@ -6,6 +6,7 @@ const Title = ({ data }) => {
   const [tododata, setTodoData] = useState(data);
   const [editindex, setEditindex] = useState("");
   const [task, setTask] = useState("");
+  const [newTask, setNewTask] = useState("");
 
   const handleEdit = (index, task) => {
     setEditindex(index);
@@ -16,7 +17,16 @@ const Title = ({ data }) => {
     setTodoData(data);
   }, [data]);
 
-  const handleSave = () => {};
+  const handleSave = async (index) => {
+    const response = await axios.put("/task", {
+      id: data._id,
+      key: index,
+      newTask: task,
+    });
+    setEditindex("");
+    setTask("");
+    setTodoData(response.data);
+  };
 
   const handleDelete = async (taskindex) => {
     const response = await axios.delete("/task", {
@@ -33,12 +43,21 @@ const Title = ({ data }) => {
     setTask("");
   };
 
+  const handleAddTask = async () => {
+    const response = await axios.post("/task", {
+      id: data._id,
+      task: newTask,
+    });
+    setNewTask("");
+    setTodoData(response.data);
+  };
+
   return (
     <>
       {/* The button to open modal */}
       <label
         htmlFor="my-modal-2"
-        className="col-span-4 text-lg text-neutral-content cursor-pointer"
+        className="col-span-4 cursor-pointer text-lg text-neutral-content"
       >
         {tododata.title}
       </label>
@@ -46,18 +65,18 @@ const Title = ({ data }) => {
       <input type="checkbox" id="my-modal-2" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box max-w-sm">
-          <h3 className="font-bold text-2xl text-center text-neutral-content">
+          <h3 className="text-center text-2xl font-bold text-neutral-content">
             {tododata.title}
           </h3>
           <ul>
             {tododata.tasks.map((e, i) => (
               <li
-                className="flex gap-4 items-center justify-between mt-4"
+                className="mt-4 flex items-center justify-between gap-4"
                 key={i}
               >
                 {editindex === i ? (
                   <input
-                    className="input input-bordered input-sm w-full max-w-xs"
+                    className="input-bordered input input-sm w-full max-w-xs"
                     type="text"
                     value={task}
                     onChange={(e) => setTask(e.target.value)}
@@ -69,7 +88,7 @@ const Title = ({ data }) => {
                   {/* edit button */}
                   {editindex === i ? (
                     <button
-                      className="btn btn-square btn-sm btn-success"
+                      className="btn-success btn-square btn-sm btn"
                       onClick={() => handleSave(i)}
                     >
                       <svg
@@ -78,7 +97,7 @@ const Title = ({ data }) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-5 h-5"
+                        className="h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -89,7 +108,7 @@ const Title = ({ data }) => {
                     </button>
                   ) : (
                     <button
-                      className="btn btn-sm btn-info btn-square"
+                      className="btn-info btn-square btn-sm btn"
                       onClick={() => handleEdit(i, e)}
                     >
                       <svg
@@ -98,7 +117,7 @@ const Title = ({ data }) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-5 h-5"
+                        className="h-5 w-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -110,7 +129,7 @@ const Title = ({ data }) => {
                   )}
                   {/* delete button */}
                   <button
-                    className="btn btn-sm btn-error btn-square"
+                    className="btn-error btn-square btn-sm btn"
                     onClick={() => handleDelete(i)}
                   >
                     <svg
@@ -119,7 +138,7 @@ const Title = ({ data }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-5 h-5"
+                      className="h-5 w-5"
                     >
                       <path
                         strokeLinecap="round"
@@ -132,6 +151,17 @@ const Title = ({ data }) => {
               </li>
             ))}
           </ul>
+          <div className="mt-4 flex gap-4">
+            <input
+              type="text"
+              className="input-bordered input input-sm"
+              onChange={(e) => setNewTask(e.target.value)}
+              value={newTask}
+            />
+            <button className="btn-accent btn-sm btn" onClick={handleAddTask}>
+              Add Task
+            </button>
+          </div>
           <div className="modal-action">
             <label htmlFor="my-modal-2" className="btn" onClick={close}>
               Close
