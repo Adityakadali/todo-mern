@@ -1,6 +1,23 @@
+import axios from "axios";
+import { useState } from "react";
+import useUserStore from "../store/useStore";
 import AddTodo from "./AddTodo";
 
 const Search = () => {
+  const [query, setQuery] = useState("");
+  const userid = useUserStore((state) => state.userid);
+  const setTodos = useUserStore((state) => state.setTodos);
+
+  const handleQuery = async () => {
+    console.log(userid, query);
+    const { data } = await axios.get("/search", {
+      params: {
+        userid,
+        query,
+      },
+    });
+    setTodos(data);
+  };
   return (
     <div className="flex justify-between mt-4">
       <AddTodo />
@@ -10,8 +27,9 @@ const Search = () => {
             type="text"
             placeholder="Search…"
             className="input input-bordered"
+            onChange={(e) => setQuery(e.target.value)}
           />
-          <button className="btn btn-square">
+          <button className="btn btn-square" onClick={handleQuery}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
