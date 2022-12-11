@@ -4,7 +4,9 @@ Fullstack todo application with authentication system using MERN Stack
 
 ## Demo
 
-[![Watch the video](https://img.youtube.com/vi/lVdM9GcJU-M/maxresdefault.jpg)](https://youtu.be/lVdM9GcJU-M)
+Watch demo - [Youtube](https://youtu.be/lVdM9GcJU-M)
+
+[![Watch the video](https://img.youtube.com/vi/lVdM9GcJU-M/hqdefault.jpg)](https://youtu.be/lVdM9GcJU-M)
 
 ## Tech Stack Used
 
