@@ -14,12 +14,15 @@ Watch demo - [Youtube](https://youtu.be/p5_4Rxc8PzU)
 
 - React
 - Zustand
+- Tailwind CSS
+- Daisy UI
 
 ### Backend
 
 - NodeJS
 - Express
 - MongoDB
+- Mongoose ORM
 - AppWrite
 
 ## Main Features
